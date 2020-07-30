@@ -29,7 +29,7 @@ class _WeatherPageState extends State<WeatherPage> {
     return Scaffold(
       appBar: AppBar(
         key: const Key('__Weather_App_Bar__'),
-        title: const Text('Flutter_Bloc Weather'),
+        title: const Text('States Rebuilder Weather'),
         actions: <Widget>[
           IconButton(
             key: const Key('__Settings_IconButton__'),
