@@ -1,0 +1,14 @@
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
+import 'package:large_states_rebuilder/injection.config.dart';
+
+// The instantiation of our service generator.
+final GetIt getIt = GetIt.instance;
+
+/// Initialises the specified dependencies used in our service locator [getIt].
+///
+/// The parameter [env] can be used to differetiate between production, test or development.
+@injectableInit
+Future<void> configureInjection(String env) {
+  return $initGetIt(getIt, environment: env);
+}
