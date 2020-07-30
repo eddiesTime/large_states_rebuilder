@@ -13,7 +13,8 @@ class AuthenticationPage extends StatelessWidget {
         key: const Key('__Authentication_Page_Injector__'),
         inject: [
           Inject<SignInFormStore>(
-            () => SignInFormStore(getIt<IAuthFacade>()),
+            () =>
+                SignInFormStore(getIt<IAuthFacade>(), getIt<SignInFormState>()),
           ),
         ],
         builder: (context) => const Center(

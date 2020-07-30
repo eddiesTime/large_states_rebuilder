@@ -8,7 +8,7 @@ part 'authentication_store.freezed.dart';
 
 class AuthenticationStore {
   final IAuthFacade _authFacade;
-  AuthenticationStore(this._authFacade);
+  AuthenticationStore(this._authFacade, this._authenticationState);
 
   AuthenticationState _authenticationState;
   AuthenticationState get state => _authenticationState;

@@ -36,7 +36,7 @@ class StatesRebuilderApp extends StatelessWidget {
       ],
       builder: (context) => StateBuilder<ThemeStore>(
           observe: () => _themeStore,
-          builder: (context, reactiveModel) {
+          builder: (context, _) {
             return MaterialApp(
               title: 'Flutter Demo',
               theme: _themeStore.state.themeEntity.themeData,

@@ -9,12 +9,38 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ReactiveModel<AuthenticationStore> _reactiveModel =
         Injector.getAsReactive<AuthenticationStore>();
-    return OnSetStateListener<AuthenticationStore>(
+    // return OnSetStateListener<AuthenticationStore>(
+    //     onSetState: (context, reactiveModel) {
+    //       print(_reactiveModel.state.state);
+    //       _reactiveModel.state.state.map(
+    //         initial: (_) {},
+    //         authenticated: (_) =>
+    //             ExtendedNavigator.root.replace(Routes.weatherPage),
+    //         unauthenticated: (_) =>
+    //             ExtendedNavigator.root.replace(Routes.authenticationPage),
+    //       );
+    //     },
+    //     onData: (context, reactiveMode) {
+    //       _reactiveModel.state.state.map(
+    //         initial: (_) {},
+    //         authenticated: (_) =>
+    //             ExtendedNavigator.root.replace(Routes.weatherPage),
+    //         unauthenticated: (_) =>
+    //             ExtendedNavigator.root.replace(Routes.authenticationPage),
+    //       );
+    //     },
+    //     shouldOnInitState: true,
+    //     child: _PageWidget());
+    return StateBuilder<AuthenticationStore>(
       observe: () => _reactiveModel,
-      onData: (context, _) {
-        return _reactiveModel.setState(
-          (s) => s.state.map(
-            initial: (_) {},
+      initState: (context, _) {
+        _reactiveModel.setState(
+          (s) => s.authCheckRequested(),
+          shouldAwait: true,
+          onSetState: (context) => _reactiveModel.state.state.map(
+            initial: (_) {
+              return;
+            },
             authenticated: (_) =>
                 ExtendedNavigator.root.replace(Routes.weatherPage),
             unauthenticated: (_) =>
@@ -22,7 +48,7 @@ class SplashPage extends StatelessWidget {
           ),
         );
       },
-      child: _PageWidget(),
+      builder: (context, _) => _PageWidget(),
     );
     // return BlocListener<AuthenticationBloc, AuthenticationState>(
     //   listener: (context, state) {

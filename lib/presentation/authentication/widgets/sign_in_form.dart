@@ -19,32 +19,30 @@ class SignInForm extends StatelessWidget {
     return OnSetStateListener<SignInFormStore>(
         observe: () => _reactiveSignInFormStoreModel,
         onData: (context, _) {
-          return _reactiveSignInFormStoreModel.setState(
-            (currentState) =>
-                currentState.state.authFailureOrSuccessOption.fold(
-              () {},
-              (either) {
-                either.fold(
-                  (failure) {
-                    FlushbarHelper.createError(
-                      message: failure.map(
-                        // Use localized strings here in your apps
-                        cancelledByUser: (_) => 'Cancelled',
-                        serverError: (_) => 'Server error',
-                        emailAlreadyInUse: (_) => 'Email already in use',
-                        invalidEmailAndPasswordCombination: (_) =>
-                            'Invalid email and password combination',
-                      ),
-                    ).show(context);
-                  },
-                  (_) {
-                    ExtendedNavigator.root.replace(Routes.weatherPage);
-                    _reactiveAuthenticationStoreModel.setState(
-                        (currentState) => currentState.authCheckRequested());
-                  },
-                );
-              },
-            ),
+          _reactiveSignInFormStoreModel.state.state.authFailureOrSuccessOption
+              .fold(
+            () {},
+            (either) {
+              either.fold(
+                (failure) {
+                  FlushbarHelper.createError(
+                    message: failure.map(
+                      // Use localized strings here in your apps
+                      cancelledByUser: (_) => 'Cancelled',
+                      serverError: (_) => 'Server error',
+                      emailAlreadyInUse: (_) => 'Email already in use',
+                      invalidEmailAndPasswordCombination: (_) =>
+                          'Invalid email and password combination',
+                    ),
+                  ).show(context);
+                },
+                (_) {
+                  ExtendedNavigator.root.replace(Routes.weatherPage);
+                  _reactiveAuthenticationStoreModel.setState(
+                      (currentState) => currentState.authCheckRequested());
+                },
+              );
+            },
           );
         },
         child: StateBuilder<SignInFormStore>(

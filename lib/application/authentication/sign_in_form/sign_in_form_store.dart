@@ -10,7 +10,7 @@ part 'sign_in_form_store.freezed.dart';
 
 class SignInFormStore {
   final IAuthFacade _authFacade;
-  SignInFormStore(this._authFacade);
+  SignInFormStore(this._authFacade, this._signInFormState);
 
   SignInFormState _signInFormState;
   SignInFormState get state => _signInFormState;

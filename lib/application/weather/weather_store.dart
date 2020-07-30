@@ -70,16 +70,20 @@ class WeatherStore {
     final Either<WeatherFailure, WeatherResponse> failureOrSuccess =
         await _weatherFacade.getWeatherWithQuery(city: _city);
 
-    failureOrSuccess.fold((failure) async* {
+    WeatherFailure _wf;
+    WeatherResponse _wr;
+    failureOrSuccess.fold((l) => {_wf = l}, (r) => {_wr = r});
+
+    if (failureOrSuccess.isLeft()) {
       yield _weatherState = state.copyWith(
         city: _city,
         isLoading: false,
         showErrorMessages: true,
-        weatherFailureOrSuccessOption: some(left(failure)),
+        weatherFailureOrSuccessOption: some(left(_wf)),
       );
-    }, (success) async* {
+    } else {
       final WeatherEntity _we = state.weatherEntity.copyWith(
-        weatherResponse: some(success),
+        weatherResponse: some(_wr),
         lastUpdated: some(requestTime),
       );
       await _localStorageFacade.saveToLocalStorage(weatherEntity: _we);
@@ -88,9 +92,9 @@ class WeatherStore {
         weatherEntity: _we,
         isLoading: false,
         showErrorMessages: true,
-        weatherFailureOrSuccessOption: some(right(success)),
+        weatherFailureOrSuccessOption: some(right(_wr)),
       );
-    });
+    }
   }
 
   Stream<void> fetchWeatherForLocationWithLattLong({
@@ -109,16 +113,19 @@ class WeatherStore {
       latt: _userPosition.latitude,
       long: _userPosition.longitude,
     );
+    WeatherFailure _wf;
+    WeatherResponse _wr;
+    failureOrSuccess.fold((l) => {_wf = l}, (r) => {_wr = r});
 
-    failureOrSuccess.fold((failure) async* {
+    if (failureOrSuccess.isLeft()) {
       yield _weatherState = state.copyWith(
         isLoading: false,
         showErrorMessages: true,
-        weatherFailureOrSuccessOption: some(left(failure)),
+        weatherFailureOrSuccessOption: some(left(_wf)),
       );
-    }, (success) async* {
+    } else {
       final WeatherEntity _we = state.weatherEntity.copyWith(
-        weatherResponse: some(success),
+        weatherResponse: some(_wr),
         lastUpdated: some(requestTime),
       );
       await _localStorageFacade.saveToLocalStorage(weatherEntity: _we);
@@ -128,9 +135,9 @@ class WeatherStore {
         weatherEntity: _we,
         isLoading: false,
         showErrorMessages: true,
-        weatherFailureOrSuccessOption: some(right(success)),
+        weatherFailureOrSuccessOption: some(right(_wr)),
       );
-    });
+    }
   }
 
   /// Refreshes the weather for given [location]. It handles the
@@ -150,16 +157,20 @@ class WeatherStore {
     final Either<WeatherFailure, WeatherResponse> failureOrSuccess =
         await _weatherFacade.getWeatherWithQuery(city: _city);
 
-    failureOrSuccess.fold((failure) async* {
+    WeatherFailure _wf;
+    WeatherResponse _wr;
+    failureOrSuccess.fold((l) => {_wf = l}, (r) => {_wr = r});
+
+    if (failureOrSuccess.isLeft()) {
       yield _weatherState = state.copyWith(
         city: _city,
         isLoading: false,
         showErrorMessages: true,
-        weatherFailureOrSuccessOption: some(left(failure)),
+        weatherFailureOrSuccessOption: some(left(_wf)),
       );
-    }, (success) async* {
+    } else {
       final WeatherEntity _we = state.weatherEntity.copyWith(
-        weatherResponse: some(success),
+        weatherResponse: some(_wr),
         lastUpdated: some(requestTime),
       );
       await _localStorageFacade.saveToLocalStorage(weatherEntity: _we);
@@ -168,19 +179,19 @@ class WeatherStore {
         weatherEntity: _we,
         isLoading: false,
         showErrorMessages: true,
-        weatherFailureOrSuccessOption: some(right(success)),
+        weatherFailureOrSuccessOption: some(right(_wr)),
       );
-    });
+    }
   }
 
-  Future<void> _loadWeatherEntityFromStorage() async {
+  Future<void> loadWeatherEntityFromStorage() async {
     final Either<LocalStorageFailure, WeatherEntity> failureOrSuccess =
         _localStorageFacade.loadWeatherDataFromLocalStorage();
 
     WeatherEntity _we;
-    failureOrSuccess.fold((failure) async* {
-      _weatherState = _weatherState = state;
-    }, (success) async* {
+    failureOrSuccess.fold((failure) => null, (success) => {_we = success});
+
+    if (failureOrSuccess.isRight()) {
       final City _city = City(_we.weatherResponse.getOrElse(() => null).title);
       _weatherState = state.copyWith(
         city: _city,
@@ -192,7 +203,7 @@ class WeatherStore {
           ),
         ),
       );
-    });
+    }
   }
 
   /// Returns the `WeatherCondition` for the current weather.

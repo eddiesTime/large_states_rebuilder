@@ -27,10 +27,13 @@ Future<void> main() async {
           ),
         ),
         Inject<AuthenticationStore>(
-          () => AuthenticationStore(getIt<IAuthFacade>()),
+          () => AuthenticationStore(
+              getIt<IAuthFacade>(), getIt<AuthenticationState>()),
         ),
       ],
-      builder: (context) => StatesRebuilderApp(),
+      builder: (context) {
+        return StatesRebuilderApp();
+      },
     ),
   );
 }
