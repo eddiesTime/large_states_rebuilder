@@ -4,7 +4,6 @@ import '../utils.dart';
 import 'test_element.dart';
 
 class PageWidgetTestElement extends TestElement {
-  final _scaffold = find.byValueKey('__Splash_Page_Scaffold__');
   final _progressIndicator =
       find.byValueKey('__Splash_Page_Progress_Indicator__');
 

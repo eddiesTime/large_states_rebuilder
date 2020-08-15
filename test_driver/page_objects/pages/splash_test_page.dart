@@ -7,7 +7,6 @@ import 'authentication_test_page.dart';
 import 'test_page.dart';
 
 class SplashTestPage extends TestPage {
-  final _splashPage = find.byValueKey("__Splash_Page_Bloc_Listener__");
   final _authPage = find.byValueKey('__AUTHENTICATION_PAGE_CENTER__');
   final _weatherPage = find.byValueKey('__Weather_App_Bar__');
 
