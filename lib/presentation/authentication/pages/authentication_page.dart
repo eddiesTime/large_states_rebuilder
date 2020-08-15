@@ -19,7 +19,9 @@ class AuthenticationPage extends StatelessWidget {
         ],
         builder: (context) => const Center(
           key: Key('__AUTHENTICATION_PAGE_CENTER__'),
-          child: SignInForm(),
+          child: SignInForm(
+            key: Key('__SIGN_IN_FORM_WIDGET__'),
+          ),
         ),
       ),
     );

@@ -4,6 +4,8 @@ analyzer:
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
+    - lib/**/*.gr.dart
+    - lib/injection.config.dart
   errors:
     missing_required_param: error
     missing_return: error

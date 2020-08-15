@@ -4,38 +4,36 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'dart:async';
-
 import 'package:fimber/fimber.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/get_it_helper.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_repository_core/weather_repository_core.dart';
 
 import 'application/authentication/authentication_store.dart';
-import 'application/authentication/sign_in_form/sign_in_form_store.dart';
-import 'application/weather/weather_store.dart';
-import 'domain/authentication/i_auth_facade.dart';
-import 'domain/geolocation/i_geolocation_facade.dart';
-import 'domain/local_storage/i_local_storage_facade.dart';
-import 'domain/settings/settings_entity.dart';
-import 'domain/theme/theme_entity.dart';
-import 'domain/weather/i_weather_facade.dart';
-import 'domain/weather/weather_entity.dart';
+import 'infrastructure/logging/fimber_facade.dart';
 import 'infrastructure/authentication/firebase_auth_facade.dart';
 import 'infrastructure/authentication/firebase_injectable_module.dart';
 import 'infrastructure/authentication/firebase_user_mapper.dart';
 import 'infrastructure/geolocation/geolocator_facade.dart';
 import 'infrastructure/geolocation/geolocator_injectable_module.dart';
+import 'domain/authentication/i_auth_facade.dart';
+import 'domain/geolocation/i_geolocation_facade.dart';
+import 'domain/local_storage/i_local_storage_facade.dart';
+import 'infrastructure/logging/i_logging_facade.dart';
+import 'domain/weather/i_weather_facade.dart';
 import 'infrastructure/local_storage/local_storage_facade.dart';
 import 'infrastructure/local_storage/local_storage_injectable_module.dart';
-import 'infrastructure/logging/fimber_facade.dart';
-import 'infrastructure/logging/i_logging_facade.dart';
+import 'domain/settings/settings_entity.dart';
+import 'application/authentication/sign_in_form/sign_in_form_store.dart';
+import 'domain/theme/theme_entity.dart';
+import 'domain/weather/weather_entity.dart';
 import 'infrastructure/weather/weather_repository_facade.dart';
 import 'infrastructure/weather/weather_repository_injectable_module.dart';
+import 'application/weather/weather_store.dart';
 
 /// Environment names
 const _dev = 'dev';

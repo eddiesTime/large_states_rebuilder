@@ -3,6 +3,7 @@ import 'package:large_states_rebuilder/domain/core/value_object.dart';
 import 'package:large_states_rebuilder/domain/weather/weather_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weather_app_example_data_models_core/weather_app_example_data_models_core.dart';
+import 'package:flutter/foundation.dart';
 
 part 'weather_entity_dto.freezed.dart';
 part 'weather_entity_dto.g.dart';

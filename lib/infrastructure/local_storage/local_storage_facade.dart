@@ -25,6 +25,10 @@ class LocalStorageFacade implements ILocalStorageFacade {
     try {
       final String localStoredData =
           _sharedPrefs.getString('latestWeatherEntity');
+
+      if (localStoredData == null) {
+        return left(const NoDataStored());
+      }
       final Map<String, dynamic> localStoredDataJsonMap =
           jsonDecode(localStoredData) as Map<String, dynamic>;
       final WeatherEntityDto _weatherEntityDto =

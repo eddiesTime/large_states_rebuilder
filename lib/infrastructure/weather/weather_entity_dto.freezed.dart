@@ -126,7 +126,9 @@ class __$WeatherEntityDtoCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-class _$_WeatherEntityDto implements _WeatherEntityDto {
+class _$_WeatherEntityDto
+    with DiagnosticableTreeMixin
+    implements _WeatherEntityDto {
   const _$_WeatherEntityDto(
       {@required this.idX,
       @required this.weatherResponse,
@@ -146,8 +148,18 @@ class _$_WeatherEntityDto implements _WeatherEntityDto {
   final DateTime lastUpdated;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'WeatherEntityDto(idX: $idX, weatherResponse: $weatherResponse, lastUpdated: $lastUpdated)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'WeatherEntityDto'))
+      ..add(DiagnosticsProperty('idX', idX))
+      ..add(DiagnosticsProperty('weatherResponse', weatherResponse))
+      ..add(DiagnosticsProperty('lastUpdated', lastUpdated));
   }
 
   @override
