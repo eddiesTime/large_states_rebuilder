@@ -9,28 +9,6 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ReactiveModel<AuthenticationStore> _reactiveModel =
         Injector.getAsReactive<AuthenticationStore>();
-    // return OnSetStateListener<AuthenticationStore>(
-    //     onSetState: (context, reactiveModel) {
-    //       print(_reactiveModel.state.state);
-    //       _reactiveModel.state.state.map(
-    //         initial: (_) {},
-    //         authenticated: (_) =>
-    //             ExtendedNavigator.root.replace(Routes.weatherPage),
-    //         unauthenticated: (_) =>
-    //             ExtendedNavigator.root.replace(Routes.authenticationPage),
-    //       );
-    //     },
-    //     onData: (context, reactiveMode) {
-    //       _reactiveModel.state.state.map(
-    //         initial: (_) {},
-    //         authenticated: (_) =>
-    //             ExtendedNavigator.root.replace(Routes.weatherPage),
-    //         unauthenticated: (_) =>
-    //             ExtendedNavigator.root.replace(Routes.authenticationPage),
-    //       );
-    //     },
-    //     shouldOnInitState: true,
-    //     child: _PageWidget());
     return StateBuilder<AuthenticationStore>(
       observe: () => _reactiveModel,
       initState: (context, _) {
@@ -50,18 +28,6 @@ class SplashPage extends StatelessWidget {
       },
       builder: (context, _) => _PageWidget(),
     );
-    // return BlocListener<AuthenticationBloc, AuthenticationState>(
-    //   listener: (context, state) {
-    //     state.map(
-    //       initial: (_) {},
-    //       authenticated: (_) =>
-    //           ExtendedNavigator.root.replace(Routes.weatherPage),
-    //       unauthenticated: (_) =>
-    //           ExtendedNavigator.root.replace(Routes.authenticationPage),
-    //     );
-    //   },
-    //   child: _PageWidget(),
-    // );
   }
 }
 
